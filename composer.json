@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Cwp\\Address\\Providers\\AddressServiceProvider"
+                "Cwp\\Address\\Providers\\AddressProvider"
             ]
         }
     }
