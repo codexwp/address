@@ -1,6 +1,6 @@
 {
     "name": "codexwp/address",
-    "description": "A simple package for managing address (zip code, prefecture, city, town etc).",
+    "description": "A simple package for managing address (zip code, prefecture, city, town etc). ",
     "type": "project",
     "license": "MIT",
     "authors": [
