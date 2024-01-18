@@ -1,6 +1,5 @@
 {
     "name": "codexwp/address",
-    "version": "1.0.4",
     "description": "A simple package for managing address (zip code, prefecture, city, town etc). ",
     "type": "project",
     "license": "MIT",
@@ -16,5 +15,11 @@
             "Cwp\\Address\\": "src"
         }
     },
-    "require": {}
+    "require": {},
+
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
 }
