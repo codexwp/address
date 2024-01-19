@@ -38,7 +38,7 @@ php artisan cwp:address_install
 ```
 
 ## Available APIs & Sample Response
-1. Get: your_domain / address_api / jp / {zip_code} / location
+1. Get Location : your_domain / address_api / jp / {code} / location
 ```bash
 {
   "id": 32105,
@@ -49,7 +49,7 @@ php artisan cwp:address_install
 }
 ```
 
-2. Get: your_domain / address_api / jp / {zip_code} / location_list
+2. Get Location with List : your_domain / address_api / jp / {code} / location_list
 ```bash
 {
   "location": {
@@ -78,7 +78,7 @@ php artisan cwp:address_install
   }
 }
 ```
-3. Get: your_domain / address_api / jp / {pref_name} / cities
+3. Get City List : your_domain / address_api / jp / {pref_name} / cities
 ```bash
 [
   "いなべ市",
@@ -87,7 +87,7 @@ php artisan cwp:address_install
   ......,
 ]
 ```
-4. Get: your_domain / address_api / jp / {city_name} / towns
+4. Get Town List : your_domain / address_api / jp / {city_name} / towns
 ```bash
 [
   "中島公園",
@@ -95,5 +95,10 @@ php artisan cwp:address_install
   "伏見",
   ........
 ]
+```
+
+5. Get Zip Code : your_domain / address_api / jp / /{pref} / {city} / {town} /code
+```bash
+3580053
 ```
 

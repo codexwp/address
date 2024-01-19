@@ -8,15 +8,25 @@ use Illuminate\Http\Request;
 class JpAddressController extends Controller
 {
 
-    public function location($zip_code)
+    public function code($pref, $city, $town)
     {
-        $location = JapaneseAddress::where('code', $zip_code)->first();
+        $location = JapaneseAddress::select('code')
+            ->where('pref', 'LIKE', "$pref%")
+            ->where('city', 'LIKE', "$city%")
+            ->where('town', 'LIKE', "$town%")
+            ->first();
+        return $location ? $location->code : '';
+    }
+
+    public function location($code)
+    {
+        $location = JapaneseAddress::where('code', $code)->first();
         return $location ? $location->toArray() : [];
     }
 
-    public function locationList($zip_code)
+    public function locationList($code)
     {
-        $location = JapaneseAddress::where('code', $zip_code)->first();
+        $location = JapaneseAddress::where('code', $code)->first();
         if($location)
         {
             return [
