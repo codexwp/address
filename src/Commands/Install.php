@@ -2,7 +2,7 @@
 
 namespace Cwp\Address\Commands;
 
-use Cwp\Address\Models\JapaneseAddress;
+use Cwp\Address\Models\JapanAddress;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -30,7 +30,7 @@ class Install extends Command
     public function handle()
     {
 
-        $table_name = 'cwp_japanese_addresses';
+        $table_name = 'cwp_japan_addresses';
         if(Schema::hasTable($table_name))
         {
             Schema::drop($table_name);

@@ -11,7 +11,7 @@ Route::group(['namespace' => 'Cwp\Address\Controllers', 'prefix' => 'address_api
         Route::get('/{code}/location_list', 'locationList')->name('location_list');
         Route::get('/prefectures', 'prefectures')->name('prefectures');
         Route::get('/{prefecture_name}/cities', 'cities')->name('cities');
-        Route::get('/{city_name}/towns', 'towns')->name('towns');
+        Route::get('/{prefecture_name}/{city_name}/towns', 'towns')->name('towns');
 
     });
 

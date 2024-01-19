@@ -11,10 +11,8 @@ class Controller extends BaseController
 
     public function filter(array $params): array
     {
-        foreach ($params as $key => $value)
-        {
-            if(is_null($value) || empty($value))
-            {
+        foreach ($params as $key => $value) {
+            if (is_null($value) || empty($value)) {
                 unset($params[$key]);
             }
         }
@@ -27,7 +25,7 @@ class Controller extends BaseController
             'success' => true,
             'message' => $message
         );
-        if($data)
+        if ($data)
             $body['data'] = $data;
 
         return response()->json($body);
@@ -39,9 +37,10 @@ class Controller extends BaseController
             'success' => false,
             'message' => $message
         );
-        if($errors)
+        if ($errors)
             $body['data'] = $errors;
 
         return response()->json($body, $code);
     }
+
 }

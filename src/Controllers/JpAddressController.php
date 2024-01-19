@@ -1,7 +1,8 @@
 <?php
 namespace Cwp\Address\Controllers;
 
-use Cwp\Address\Models\JapaneseAddress;
+use Cwp\Address\Library\JapanAddressService;
+use Cwp\Address\Models\JapanAddress;
 use Illuminate\Http\Request;
 
 
@@ -10,49 +11,32 @@ class JpAddressController extends Controller
 
     public function code($pref, $city, $town)
     {
-        $location = JapaneseAddress::select('code')
-            ->where('pref', 'LIKE', "$pref%")
-            ->where('city', 'LIKE', "$city%")
-            ->where('town', 'LIKE', "$town%")
-            ->first();
-        return $location ? $location->code : '';
+        return JapanAddressService::getCodeByLocation($pref, $city, $town);
     }
 
     public function location($code)
     {
-        $location = JapaneseAddress::where('code', $code)->first();
-        return $location ? $location->toArray() : [];
+        return JapanAddressService::getByCode($code);
     }
 
     public function locationList($code)
     {
-        $location = JapaneseAddress::where('code', $code)->first();
-        if($location)
-        {
-            return [
-                'location' => $location->toArray(),
-                'list' => [
-                    'prefectures' => $this->prefectures(),
-                    'cities' => $this->cities($location->pref),
-                    'towns'  => $this->towns($location->city)
-                ]
-            ];
-        }
+        return JapanAddressService::getListByCode($code);
     }
 
     public function prefectures()
     {
-        return JapaneseAddress::select('pref')->groupBy('pref')->pluck('pref')->toArray();
+        return JapanAddressService::getPrefectures();
     }
 
     public function cities($pref_name)
     {
-        return JapaneseAddress::select('city')->where('pref', $pref_name)->groupBy('city')->pluck('city')->toArray();
+        return JapanAddressService::getCities($pref_name);
     }
 
-    public function towns($city_name)
+    public function towns($prefecture_name, $city_name)
     {
-        return JapaneseAddress::select('town')->where('city', $city_name)->groupBy('town')->pluck('town')->toArray();
+        return JapanAddressService::getTowns($prefecture_name, $city_name);
     }
 
 }
