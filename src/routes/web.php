@@ -15,5 +15,13 @@ Route::group(['namespace' => 'Cwp\Address\Controllers', 'prefix' => 'address_api
 
     });
 
+    Route::group(['prefix' => 'bd', 'controller' => 'BdAddressController'], function () {
+
+        Route::get('/divisions', 'divisions')->name('divisions');
+        Route::get('/{division_name}/districts', 'districts')->name('districts');
+        Route::get('/{division_name}/{district_name}/upazilas', 'upazilas')->name('upazilas');
+
+    });
+
 });
 

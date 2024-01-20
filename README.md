@@ -1,12 +1,11 @@
 # Address API
-A simple laravel package for managing address like prefecture, city, town and postal code.
+A simple laravel package for managing address like prefecture, city, town and postal code for Japan.
+And divisions, districts and upazilas for Bangladesh. (jQuery is required for html integration)
 
 ### Supported Countries
 1. Japan
+2. Bangladesh
 
-### Requirements (For Html Integration)
-1. jQuery
-2. Axios
 
 ## Installation
 ### 1. Using Composer
@@ -14,7 +13,7 @@ Run the following commands-
 
 ```bash
 composer require "codexwp/address"
-php artisan cwp:address_install
+php artisan cwp:address_install --country={all/jp/bd}
 ```
 
 ### 2. Manually
@@ -38,27 +37,35 @@ Thirdly, open config/app.php file and add the following lines to the provider se
 Finally, discover and install the package.
 ```bash
 composer dump-autoload
-php artisan cwp:address_install
+php artisan cwp:address_install --country={all/jp/bd}
 ```
 
 ## Available APIs
 ```bash
-1. your_domain / address_api / jp / {code} / location
-2. your_domain / address_api / jp / {code} / location_list
-3. your_domain / address_api / jp / prefectures
-4. your_domain / address_api / jp / {pref_name} / cities
-5. your_domain / address_api / jp / {pref} / {city_name} / towns
-6. your_domain / address_api / jp /{pref} / {city} / {town} /code
+//Japan
+1.  / address_api / jp / {code} / location
+2.  / address_api / jp / {code} / location_list
+3.  / address_api / jp / prefectures
+4.  / address_api / jp / {pref_name} / cities
+5.  / address_api / jp / {pref} / {city_name} / towns
+6.  / address_api / jp /{pref} / {city} / {town} /code
+
+//Bangladesh
+1.  / address_api / bd / divisions
+2.  / address_api / bd / {division_name} / districts
+3.  / address_api / bd / {division_name} / {district_name} / upazilas
 ```
 ## Usages
 ### Laravel Service Class
 You can use the available methods in your laravel project.
 Just call the class and method from your controller.
 
-Path - "/src/Library/JapanAddressService.php"
+JP - "/src/Library/JpAddressService.php"
+
+BD - "/src/Library/BdAddressService.php"
 
 ### Html Integration
 1. Copy and include the "src/resources/js/address.js" file in html page.
 
-2. Check the example code in "example/test.html"
+2. Check the example code in "example" folder
 

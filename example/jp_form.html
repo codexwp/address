@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address API</title>
+    <script src="jquery.js"></script>
+    <script src="axios.js"></script>
+    <script src="/src/resources/js/address.js"></script>
+</head>
+<body>
+
+<input id="zipcode" type="text"><br>
+
+<select id="prefecture">
+    <option value="">Select Prefecture</option>
+</select><br>
+
+<select id="city">
+    <option value="">Select City</option>
+</select><br>
+
+<select id="town">
+    <option value="">Select Town</option>
+</select>
+
+<script>
+    const code_element = $("#zipcode");
+    const pref_element = $("#prefecture");
+    const city_element = $("#city");
+    const town_element = $("#town");
+
+    const base_url = "http://www.example.com";
+    new initCwpAddress(base_url, code_element, pref_element, city_element, town_element);
+</script>
+</body>
+</html>

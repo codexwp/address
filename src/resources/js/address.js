@@ -1,4 +1,4 @@
-const initCwpAddress = class {
+const cwpJpAddress = class {
 
     base_url = '';
     elements = {
@@ -158,6 +158,29 @@ const initCwpAddress = class {
 
                 });
         }
+
+    }
+
+};
+
+const cwpBdAddress = class {
+
+    base_url = '';
+    elements = {
+        division : null,
+        district : null,
+        upazila: null,
+    };
+
+    constructor(base_url, divisionElement, districtElement, upazilaElement) {
+        this.base_url = base_url;
+        this.elements = {
+            division : divisionElement,
+            district : districtElement,
+            upazila: upazilaElement,
+        };
+
+        const t = this;
 
     }
 
