@@ -16,7 +16,7 @@ composer require "codexwp/address"
 php artisan cwp:address_install --country={all/jp/bd}
 ```
 
-### 2. Manually
+### 2. Using Package
 At first, create a folder like "packages" in your project. Then you can create 
 sub folder like "packages/codexwp/address". Then put "src" folder of this package.
 

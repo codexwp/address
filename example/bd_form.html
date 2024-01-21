@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address API</title>
+    <script src="jquery.js"></script>
+    <script src="axios.js"></script>
+    <script src="/src/resources/js/address.js"></script>
+</head>
+<body>
+
+<input id="zipcode" type="text"><br>
+
+<select id="division">
+    <option value="">Division</option>
+</select><br>
+
+<select id="district">
+    <option value="">District</option>
+</select><br>
+
+<select id="upazila">
+    <option value="">Upazila</option>
+</select>
+
+<script>
+    const division = $("#division");
+    const district = $("#district");
+    const upazila = $("#upazila");
+
+    const base_url = "http://www.example.com";
+
+    new cwpBdAddress({
+        base_url : base_url,
+        loading_text : '読み込み中。',
+        elements : {
+            division : division,
+            district : district,
+            upazila : upazila,
+        }
+    });
+
+</script>
+</body>
+</html>
