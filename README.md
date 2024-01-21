@@ -56,7 +56,7 @@ php artisan cwp:address_install --country={all/jp/bd}
 3.  / address_api / bd / {division_name} / {district_name} / upazilas
 ```
 ## Usages
-### Laravel Service Class
+### Library Service
 You can use the available methods in your laravel project.
 Just call the class and method from your controller.
 
@@ -64,7 +64,9 @@ JP - "/src/Library/JpAddressService.php"
 
 BD - "/src/Library/BdAddressService.php"
 
-### Html Integration
+### Html Integration 
+Auto update select list(cities) after change of another select input (prefecture).
+
 1. Copy and include the "src/resources/js/address.js" file in html page.
 
 2. Check the example code in "example" folder

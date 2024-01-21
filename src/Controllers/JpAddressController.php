@@ -29,14 +29,14 @@ class JpAddressController extends Controller
         return JpAddressService::getPrefectures();
     }
 
-    public function cities($pref_name)
+    public function cities($pref)
     {
-        return JpAddressService::getCities($pref_name);
+        return JpAddressService::getCities($pref);
     }
 
-    public function towns($prefecture_name, $city_name)
+    public function towns($pref, $city)
     {
-        return JpAddressService::getTowns($prefecture_name, $city_name);
+        return JpAddressService::getTowns($pref, $city);
     }
 
 }
