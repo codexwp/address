@@ -20,9 +20,9 @@ const cwpJpAddress = class {
             if(pref != undefined && pref.length != '')
             {
                 t.tmp_text = t.elements.city.find('option').eq(0).text();
+                t.elements.city.html(t.elements.city.find('option')[0].outerHTML);
                 t.elements.city.find('option').eq(0).text(t.loading_text);
-                t.elements.city.val('');
-                t.elements.town.val('');
+                t.elements.town.html(t.elements.town.find('option')[0].outerHTML);
 
                 t.#fetchAddressData(t.base_url, 'city', {pref : pref}, t.elements);
             }
@@ -34,6 +34,8 @@ const cwpJpAddress = class {
             {
                 t.elements.town.val('');
                 t.tmp_text = t.elements.town.find('option').eq(0).text();
+
+                t.elements.town.html(t.elements.town.find('option')[0].outerHTML);
                 t.elements.town.find('option').eq(0).text(t.loading_text);
 
                 let pref = t.elements.pref.val();
@@ -52,16 +54,22 @@ const cwpJpAddress = class {
         t.refresh();
     }
 
-    refresh()
+    refresh(pref = '', city = '', town = '')
     {
         const t = this;
-        let code = t.elements.code.val()
-        if(code == undefined || code == '' || code.length < 7){
-            t.#fetchAddressData( t.base_url, 'prefecture', {}, t.elements)
-        }
-        else {
-            t.#fetchAddressData( t.base_url, 'location_list', {code : code}, t.elements)
-        }
+        pref = pref ? pref : t.elements.pref.attr('old-data');
+        city = city ? city : t.elements.city.attr('old-data');
+        town = town ? town : t.elements.town.attr('old-data');
+        pref = pref == undefined ? '' : pref;
+        city = city == undefined ? '' : city;
+        town = town == undefined ? '' : town;
+        t.#fetchAddressData( t.base_url, 'location_list', {pref : pref, city : city, town : town}, t.elements);
+    }
+
+    refreshByCode(code)
+    {
+        const t = this;
+        t.#fetchAddressData( t.base_url, 'location_list', {code : code}, t.elements);
     }
 
     #fetchAddressData(base_url, type, params, elements)
@@ -72,7 +80,12 @@ const cwpJpAddress = class {
         if(type == 'location')
             url += params.code + '/location';
         else if(type == 'location_list')
-            url += params.code + '/location_list';
+        {
+            if(params.code)
+                url += 'location_list?code=' + params.code;
+            else
+                url += 'location_list?pref='+ params.pref +'&city=' + params.city;
+        }
         else if(type == 'prefecture')
             url += 'prefectures';
         else if(type == 'city')
@@ -122,7 +135,6 @@ const cwpJpAddress = class {
                         option += "<option code='" + key + "' value='" + towns[key] + "'>" + towns[key] + "</option>";
                     }
                     elements.town.html(option);
-
                     elements.pref.val(data.location.pref);
                     elements.city.val(data.location.city);
                     elements.town.val(data.location.town);

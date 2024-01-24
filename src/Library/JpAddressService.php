@@ -22,30 +22,40 @@ class JpAddressService
         return $location ? $location->toArray() : [];
     }
 
-    public static function getListByCode($code = null)
+    public static function getLocationListByCode($code)
     {
-        $prefectures = self::getPrefectures();
+        $location = JpAddress::where('code', $code)->first();
         $data = [
-            'location' => null,
+            'location' => $location,
             'list' => [
-                'prefectures' => $prefectures,
+                'prefectures' => self::getPrefectures(),
                 'cities' => [],
                 'towns'  => []
             ]
         ];
-
-        $location = JpAddress::where('code', $code)->first();
         if($location)
         {
-            $data = [
-                'location' => $location->toArray(),
-                'list' => [
-                    'prefectures' => self::getPrefectures(),
-                    'cities' => self::getCities($location->pref),
-                    'towns'  => self::getTowns($location->pref, $location->city)
-                ]
-            ];
+            $data['list']['cities'] = self::getCities($location->pref);
+            $data['list']['towns'] = self::getTowns($location->pref, $location->city);
         }
+
+        return $data;
+    }
+
+    public static function getLocationList($pref = '', $city = '', $town = '')
+    {
+        $data = [
+            'location' => [
+                'pref' => $pref,
+                'city' => $city,
+                'town' => $town
+            ],
+            'list' => [
+                'prefectures' => self::getPrefectures(),
+                'cities' => $pref ? self::getCities($pref) : [],
+                'towns'  => $pref && $city ? self::getTowns($pref, $city) : []
+            ]
+        ];
         return $data;
     }
 

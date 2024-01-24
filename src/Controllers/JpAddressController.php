@@ -19,9 +19,13 @@ class JpAddressController extends Controller
         return JpAddressService::getByCode($code);
     }
 
-    public function locationList($code)
+    public function locationList(Request $request)
     {
-        return JpAddressService::getListByCode($code);
+        if($request->code)
+        {
+            return JpAddressService::getLocationListByCode($request->code);
+        }
+        return JpAddressService::getLocationList($request->pref ?? '', $request->city ?? '');
     }
 
     public function prefectures()
