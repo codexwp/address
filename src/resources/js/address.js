@@ -20,10 +20,8 @@ const cwpJpAddress = class {
             if(pref != undefined && pref.length != '')
             {
                 t.tmp_text = t.elements.city.find('option').eq(0).text();
-                t.elements.city.html(t.elements.city.find('option')[0].outerHTML);
-                t.elements.city.find('option').eq(0).text(t.loading_text);
+                t.elements.city.html("<option value=''>" + t.loading_text + "</option>");
                 t.elements.town.html(t.elements.town.find('option')[0].outerHTML);
-
                 t.#fetchAddressData(t.base_url, 'city', {pref : pref}, t.elements);
             }
         });
@@ -34,9 +32,7 @@ const cwpJpAddress = class {
             {
                 t.elements.town.val('');
                 t.tmp_text = t.elements.town.find('option').eq(0).text();
-
-                t.elements.town.html(t.elements.town.find('option')[0].outerHTML);
-                t.elements.town.find('option').eq(0).text(t.loading_text);
+                t.elements.town.html("<option value=''>" + t.loading_text + "</option>");
 
                 let pref = t.elements.pref.val();
                 t.#fetchAddressData(t.base_url,'town', {city : city, pref : pref}, t.elements);
@@ -150,17 +146,16 @@ const cwpJpAddress = class {
                 }
                 else if(type == 'city')
                 {
-                    option = elements.city.find('option')[0].outerHTML;
+                    option = "<option value=''>" + t.tmp_text + "</option>";
                     for(let i = 0; i < data.length; i++)
                     {
                         option += "<option value='" + data[i] + "'>" + data[i] + "</option>";
                     }
                     elements.city.html(option);
-                    t.elements.city.find('option').eq(0).text(t.tmp_text);
                 }
                 else if(type == 'town')
                 {
-                    option = elements.town.find('option')[0].outerHTML;
+                    option = "<option value=''>" + t.tmp_text + "</option>";
                     let town_keys = Object.keys(data);
                     let key = '';
                     for(let i = 0; i <  town_keys.length; i++)
@@ -169,7 +164,6 @@ const cwpJpAddress = class {
                         option += "<option code='" + key + "' value='" + data[key] + "'>"+ data[key] +"</option>";
                     }
                     elements.town.html(option);
-                    t.elements.town.find('option').eq(0).text(t.tmp_text);
                 }
             })
             .catch(thrown => {
